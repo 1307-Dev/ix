@@ -261,6 +261,7 @@ export class Upload {
           {this.renderUploadState()}
           <div>
             <input
+
               aria-label={ariaLabel}
               aria-disabled={disabled}
               multiple={this.multiple}
@@ -275,7 +276,6 @@ export class Upload {
               disabled={disabled}
             />
             <ix-button
-              aria-disabled={disabled}
               outline
               onClick={() => this.inputElement.click()}
               disabled={disabled}
