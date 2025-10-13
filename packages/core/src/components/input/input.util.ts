@@ -90,6 +90,20 @@ export function onInputBlur<T>(
   checkInternalValidity(comp, input);
 }
 
+export function onInputKeydown<T>(
+  comp: IxFormComponent<T>,
+  input?: HTMLInputElement | HTMLTextAreaElement | null
+) {
+  console.log('onInputKeydown called');
+  if (!input) {
+    throw new Error('Input element is not available');
+  }
+
+  comp.touched = true;
+  input.setAttribute('data-ix-touched', 'true');
+  checkInternalValidity(comp, input);
+}
+
 export function applyPaddingEnd(
   inputElement: HTMLElement | null,
   width: number,

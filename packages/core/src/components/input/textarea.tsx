@@ -26,7 +26,7 @@ import {
 } from '../utils/input';
 import { makeRef } from '../utils/make-ref';
 import { TextareaElement } from './input.fc';
-import { mapValidationResult, onInputBlur } from './input.util';
+import { checkAllowedKeys, mapValidationResult, onInputBlur } from './input.util';
 import type { TextareaResizeBehavior } from './textarea.types';
 
 /**
@@ -267,6 +267,14 @@ export class Textarea implements IxInputFieldComponent<string> {
               placeholder={this.placeholder}
               textAreaRef={this.textAreaRef}
               valueChange={(value) => this.valueChange.emit(value)}
+              onKeyDown={(event) => {
+                              checkAllowedKeys(this, event);
+                              if (this.textAreaRef.current) {
+                                import('./input.util').then(util => {
+                                  util.onInputKeydown(this, this.textAreaRef.current);
+                                });
+                              }
+                            }}
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(value)
               }

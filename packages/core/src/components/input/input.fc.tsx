@@ -27,6 +27,7 @@ export function TextareaElement(
     placeholder?: string;
     textAreaRef: (el: HTMLTextAreaElement | undefined) => void;
     valueChange: (value: string) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
     updateFormInternalValue: (value: string) => void;
     onBlur: () => void;
     ariaAttributes?: A11yAttributes;
@@ -47,6 +48,7 @@ export function TextareaElement(
       required={props.required}
       value={props.value}
       placeholder={props.placeholder}
+      onKeyDown={props.onKeyDown}
       onInput={(inputEvent) => {
         const target = inputEvent.target as HTMLInputElement;
         props.updateFormInternalValue(target.value);
@@ -81,6 +83,7 @@ export function InputElement(
     placeholder?: string;
     inputRef: (el: HTMLInputElement | undefined) => void;
     onKeyPress: (event: KeyboardEvent) => void;
+    onKeyDown?: (event: KeyboardEvent) => void;
     valueChange: (value: string) => void;
     updateFormInternalValue: (value: string) => void;
     onBlur: () => void;
@@ -108,6 +111,7 @@ export function InputElement(
       value={props.value}
       placeholder={props.placeholder}
       onKeyPress={(event) => props.onKeyPress(event)}
+      onKeyDown={props.onKeyDown}
       onInput={(inputEvent) => {
         const target = inputEvent.target as HTMLInputElement;
         props.updateFormInternalValue(target.value);

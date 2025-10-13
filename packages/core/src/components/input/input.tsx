@@ -307,6 +307,14 @@ export class Input implements IxInputFieldComponent<string> {
               placeholder={this.placeholder}
               inputRef={this.inputRef}
               onKeyPress={(event) => checkAllowedKeys(this, event)}
+              onKeyDown={(event) => {
+                checkAllowedKeys(this, event);
+                if (this.inputRef.current) {
+                  import('./input.util').then(util => {
+                    util.onInputKeydown(this, this.inputRef.current);
+                  });
+                }
+              }}
               valueChange={(value) => this.valueChange.emit(value)}
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(value)
