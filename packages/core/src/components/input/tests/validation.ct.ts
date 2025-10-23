@@ -39,6 +39,24 @@ test.describe('validation', () => {
 
       await expect(input).toHaveClass(/ix-invalid/);
     });
+
+    test.only('required validation should be triggered', async ({
+      mount,
+      page,
+    }) => {
+      await mount('<ix-input required></ix-input>');
+
+      const input = page.locator('ix-input');
+      const shadowDomInput = input.locator('input');
+
+      await shadowDomInput.focus();
+      await shadowDomInput.blur();
+
+      await shadowDomInput.fill('some value');
+      await shadowDomInput.blur();
+
+      await expect(input).not.toHaveClass(/ix-invalid--required/);
+    });
   });
 
   test.describe('ix-number-input', () => {
