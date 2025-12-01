@@ -172,6 +172,11 @@ export class Input implements IxInputFieldComponent<string> {
    */
   @Event() ixBlur!: EventEmitter<void>;
 
+  /**
+   * Event emitted when the text field value changes and loses focus (committed change).
+   */
+  @Event() ixChange!: EventEmitter<string>;
+
   @State() isInvalid = false;
   @State() isValid = false;
   @State() isInfo = false;
@@ -179,6 +184,7 @@ export class Input implements IxInputFieldComponent<string> {
   @State() isInvalidByRequired = false;
 
   @State() inputType = 'text';
+  @State() private focusValue: string = '';
 
   private readonly inputRef = makeRef<HTMLInputElement>();
   private readonly slotEndRef = makeRef<HTMLDivElement>();
@@ -211,6 +217,27 @@ export class Input implements IxInputFieldComponent<string> {
       );
   }
 
+  componentDidLoad(): void {
+    // Setup form event listener after component is fully loaded
+    this.setupFormEventListener();
+  }
+
+  private setupFormEventListener(): void {
+    // Try to get form and add event listener
+    const form = this.formInternals.form;
+    if (form) {
+      form.addEventListener('submit', this.onFormSubmit);
+    } else {
+      // Retry after a short delay if form is not yet available
+      setTimeout(() => {
+        const retryForm = this.formInternals.form;
+        if (retryForm) {
+          retryForm.addEventListener('submit', this.onFormSubmit);
+        }
+      }, 0);
+    }
+  }
+
   private updatePaddings() {
     adjustPaddingForStartAndEnd(
       this.slotStartRef.current,
@@ -221,12 +248,35 @@ export class Input implements IxInputFieldComponent<string> {
 
   disconnectedCallback(): void {
     this.disposableChangesAndVisibilityObservers?.();
+    const form = this.formInternals.form;
+    if (form) {
+      form.removeEventListener('submit', this.onFormSubmit);
+    }
   }
 
   updateFormInternalValue(value: string) {
     this.formInternals.setFormValue(value);
     this.value = value;
   }
+
+  private onInputFocus = () => {
+    this.focusValue = this.value;
+  };
+
+  private onFormSubmit = () => {
+    if (this.focusValue !== this.value) {
+      console.log('Emitting ixChange on form submit');
+      this.ixChange.emit(this.value);
+      this.focusValue = this.value;
+    }
+  };
+
+  private emitChangeIfValueChanged = () => {
+    if (this.focusValue !== this.value) {
+      this.ixChange.emit(this.value);
+      this.focusValue = this.value;
+    }
+  };
 
   /** @internal */
   @Method()
@@ -322,9 +372,16 @@ export class Input implements IxInputFieldComponent<string> {
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(value)
               }
+              onFocus={() => this.onInputFocus()}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  this.emitChangeIfValueChanged();
+                }
+              }}
               onBlur={() => {
                 onInputBlur(this, this.inputRef.current);
                 this.touched = true;
+                this.emitChangeIfValueChanged();
               }}
               ariaAttributes={inputAria}
               form={this.formInternals.form ?? undefined}

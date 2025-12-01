@@ -88,6 +88,7 @@ export function InputElement(
     onPaste?: (event: ClipboardEvent) => void;
     valueChange: (value: string) => void;
     updateFormInternalValue: (value: string) => void;
+    onFocus?: () => void;
     onBlur: () => void;
     ariaAttributes?: A11yAttributes;
     form?: HTMLFormElement;
@@ -135,6 +136,7 @@ export function InputElement(
         props.updateFormInternalValue(target.value);
         props.valueChange(target.value);
       }}
+      onFocus={() => props.onFocus?.()}
       onBlur={() => props.onBlur()}
       {...props.ariaAttributes}
     ></input>
