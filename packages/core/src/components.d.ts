@@ -4952,6 +4952,7 @@ declare global {
         new (): HTMLIxIconToggleButtonElement;
     };
     interface HTMLIxInputElementEventMap {
+        "ixChange": any;
         "valueChange": string;
         "validityStateChange": ValidityState;
         "ixBlur": void;
@@ -5264,6 +5265,7 @@ declare global {
         new (): HTMLIxModalLoadingElement;
     };
     interface HTMLIxNumberInputElementEventMap {
+        "ixChange": any;
         "valueChange": number;
         "validityStateChange": ValidityState;
         "ixBlur": void;
@@ -5514,6 +5516,7 @@ declare global {
         new (): HTMLIxTabsElement;
     };
     interface HTMLIxTextareaElementEventMap {
+        "ixChange": any;
         "valueChange": string;
         "validityStateChange": ValidityState;
         "ixBlur": void;
@@ -7829,6 +7832,10 @@ declare namespace LocalJSX {
          */
         "onIxBlur"?: (event: IxInputCustomEvent<void>) => void;
         /**
+          * Event emitted when the input value changes and loses focus (committed change).
+         */
+        "onIxChange"?: (event: IxInputCustomEvent<any>) => void;
+        /**
           * Event emitted when the validity state of the text field changes.
          */
         "onValidityStateChange"?: (event: IxInputCustomEvent<ValidityState>) => void;
@@ -8490,6 +8497,10 @@ declare namespace LocalJSX {
           * Event emitted when the input field loses focus
          */
         "onIxBlur"?: (event: IxNumberInputCustomEvent<void>) => void;
+        /**
+          * Event emitted when the input value changes and loses focus (committed change).
+         */
+        "onIxChange"?: (event: IxNumberInputCustomEvent<any>) => void;
         /**
           * Event emitted when the validity state of the input field changes
          */
@@ -9356,6 +9367,10 @@ declare namespace LocalJSX {
           * Event emitted when the textarea field loses focus.
          */
         "onIxBlur"?: (event: IxTextareaCustomEvent<void>) => void;
+        /**
+          * Event emitted when the input value changes and loses focus (committed change).
+         */
+        "onIxChange"?: (event: IxTextareaCustomEvent<any>) => void;
         /**
           * Event emitted when the validity state of the textarea field changes.
          */

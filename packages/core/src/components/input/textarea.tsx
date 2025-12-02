@@ -15,6 +15,7 @@ import {
   EventEmitter,
   Host,
   Method,
+  Mixin,
   Prop,
   State,
   Watch,
@@ -27,6 +28,7 @@ import {
 } from '../utils/input';
 import { makeRef } from '../utils/make-ref';
 import { TextareaElement } from './input.fc';
+import { IxChangeMixin } from './input-change.mixin';
 import { mapValidationResult, onInputBlur } from './input.util';
 import type { TextareaResizeBehavior } from './textarea.types';
 
@@ -39,7 +41,10 @@ import type { TextareaResizeBehavior } from './textarea.types';
   shadow: true,
   formAssociated: true,
 })
-export class Textarea implements IxInputFieldComponent<string> {
+export class Textarea
+  extends Mixin(IxChangeMixin)
+  implements IxInputFieldComponent<string>
+{
   @Element() hostElement!: HTMLIxTextareaElement;
   @AttachInternals() formInternals!: ElementInternals;
 
@@ -198,8 +203,13 @@ export class Textarea implements IxInputFieldComponent<string> {
     this.updateFormInternalValue(this.value);
   }
 
+  componentDidLoad(): void {
+    this.setupFormEventListener(this.formInternals);
+  }
+
   disconnectedCallback() {
     this.resizeObserver?.disconnect();
+    this.cleanupFormEventListener(this.formInternals);
   }
 
   private initResizeObserver() {
@@ -332,9 +342,11 @@ export class Textarea implements IxInputFieldComponent<string> {
               updateFormInternalValue={(value) =>
                 this.updateFormInternalValue(value)
               }
+              onFocus={() => this.onInputFocus()}
               onBlur={() => {
                 onInputBlur(this, this.textAreaRef.current);
                 this.touched = true;
+                this.emitChangeIfValueChanged();
               }}
             ></TextareaElement>
           </div>

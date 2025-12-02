@@ -17,6 +17,7 @@ import {
   h,
   Host,
   Method,
+  Mixin,
   Prop,
   State,
   Watch,
@@ -26,6 +27,7 @@ import {
   IxInputFieldComponent,
   ValidationResults,
 } from '../utils/input';
+import { IxChangeMixin } from './input-change.mixin';
 import { makeRef } from '../utils/make-ref';
 import { InputElement, SlotEnd, SlotStart } from './input.fc';
 import {
@@ -53,7 +55,10 @@ const INVALID_NUMBER_INPUT_REGEX = /[^\dEe+\-.,]/;
   shadow: true,
   formAssociated: true,
 })
-export class NumberInput implements IxInputFieldComponent<number> {
+export class NumberInput
+  extends Mixin(IxChangeMixin)
+  implements IxInputFieldComponent<number>
+{
   @Element() hostElement!: HTMLIxNumberInputElement;
   @AttachInternals() formInternals!: ElementInternals;
 
@@ -223,8 +228,14 @@ export class NumberInput implements IxInputFieldComponent<number> {
       );
   }
 
+  componentDidLoad(): void {
+    // Setup form event listener after component is fully loaded
+    this.setupFormEventListener(this.formInternals);
+  }
+
   disconnectedCallback() {
     this.disposableChangesAndVisibilityObservers?.();
+    this.cleanupFormEventListener(this.formInternals);
   }
 
   private updatePaddings() {
@@ -295,6 +306,7 @@ export class NumberInput implements IxInputFieldComponent<number> {
 
     onInputBlur(this, this.inputRef.current);
     this.touched = true;
+    this.emitChangeIfValueChanged();
   };
 
   private readonly handleKeyDown = (event: KeyboardEvent) => {
@@ -489,6 +501,7 @@ export class NumberInput implements IxInputFieldComponent<number> {
                   this.updateFormInternalValue(parsedValue!);
                 }
               }}
+              onFocus={() => this.onInputFocus()}
               onBlur={this.handleBlur}
               form={this.formInternals.form ?? undefined}
               suppressSubmitOnEnter={this.suppressSubmitOnEnter}

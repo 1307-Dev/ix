@@ -979,6 +979,7 @@ export const IxIconToggleButton: StencilReactComponent<IxIconToggleButtonElement
 });
 
 export type IxInputEvents = {
+    onIxChange: EventName<CustomEvent<any>>,
     onValueChange: EventName<CustomEvent<string>>,
     onValidityStateChange: EventName<IxInputCustomEvent<ValidityState>>,
     onIxBlur: EventName<CustomEvent<void>>
@@ -1352,6 +1353,7 @@ export const IxModalHeader: StencilReactComponent<IxModalHeaderElement, IxModalH
 });
 
 export type IxNumberInputEvents = {
+    onIxChange: EventName<CustomEvent<any>>,
     onValueChange: EventName<CustomEvent<number>>,
     onValidityStateChange: EventName<IxNumberInputCustomEvent<ValidityState>>,
     onIxBlur: EventName<CustomEvent<void>>
@@ -1715,6 +1717,7 @@ export const IxTabs: StencilReactComponent<IxTabsElement, IxTabsEvents> = /*@__P
 });
 
 export type IxTextareaEvents = {
+    onIxChange: EventName<CustomEvent<any>>,
     onValueChange: EventName<CustomEvent<string>>,
     onValidityStateChange: EventName<IxTextareaCustomEvent<ValidityState>>,
     onIxBlur: EventName<CustomEvent<void>>

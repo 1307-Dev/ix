@@ -1,4 +1,4 @@
-import { IxInput, IxButton, IxDateInput, IxTimeInput, IxNumberInput } from '@siemens/ix-react';
+import { IxInput, IxButton, IxDateInput, IxTimeInput, IxNumberInput, IxTextarea } from '@siemens/ix-react';
 
 export default () => {
   const handleSubmit = (e: React.FormEvent, formType: string) => {
@@ -15,7 +15,12 @@ export default () => {
         }}
         id="login-form"
       >
-        <IxInput type="email" name="email" id="email" />
+        <IxInput
+          type="email"
+          name="email"
+          id="email"
+          onIxChange={(e) => console.log('IxInput ixChange event:', e.detail)}
+        />
         <IxButton
           form="login-form"
           type="submit"
@@ -35,9 +40,28 @@ export default () => {
         }}
       >
         <h3>IxInput Form</h3>
-        <IxInput type="email" name="email" placeholder="Email" />
-        <IxInput type="password" name="password" placeholder="Password" />
-        <IxNumberInput name="age" placeholder="Age" />
+        <IxInput
+          type="email"
+          name="email"
+          placeholder="Email"
+          onIxChange={(e) => console.log('Email ixChange:', e.detail)}
+        />
+        <IxInput
+          type="password"
+          name="password"
+          placeholder="Password"
+          onIxChange={(e) => console.log('Password ixChange:', e.detail)}
+        />
+        <IxNumberInput
+          name="age"
+          placeholder="Age"
+          onIxChange={(e) => console.log('Age ixChange:', e.detail)}
+        />
+        <IxTextarea
+          name="bio"
+          placeholder="Bio"
+          onIxChange={(e) => console.log('Bio ixChange:', e.detail)}
+        />
         <IxDateInput name="dob" placeholder="Date of Birth" />
         <IxTimeInput name="appointment" placeholder="Appointment Time" />
         <IxButton type="submit">Submit</IxButton>

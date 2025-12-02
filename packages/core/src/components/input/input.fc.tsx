@@ -29,6 +29,7 @@ export function TextareaElement(
     textAreaRef: (el: HTMLTextAreaElement | undefined) => void;
     valueChange: (value: string) => void;
     updateFormInternalValue: (value: string) => void;
+    onFocus?: () => void;
     onBlur: () => void;
     ariaAttributes?: A11yAttributes;
   }>
@@ -53,6 +54,7 @@ export function TextareaElement(
         props.updateFormInternalValue(target.value);
         props.valueChange(target.value);
       }}
+      onFocus={() => props.onFocus?.()}
       onBlur={() => props.onBlur()}
       style={{
         resize: props.resizeBehavior,

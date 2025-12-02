@@ -697,6 +697,7 @@ export const IxIconToggleButton: StencilReactComponent<IxIconToggleButtonElement
 });
 
 export type IxInputEvents = {
+    onIxChange: EventName<CustomEvent<any>>,
     onValueChange: EventName<CustomEvent<string>>,
     onValidityStateChange: EventName<IxInputCustomEvent<ValidityState>>,
     onIxBlur: EventName<CustomEvent<void>>
@@ -708,6 +709,7 @@ export const IxInput: StencilReactComponent<IxInputElement, IxInputEvents> = /*@
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {
+        onIxChange: 'ixChange',
         onValueChange: 'valueChange',
         onValidityStateChange: 'validityStateChange',
         onIxBlur: 'ixBlur'
@@ -1000,6 +1002,7 @@ export const IxModalHeader: StencilReactComponent<IxModalHeaderElement, IxModalH
 });
 
 export type IxNumberInputEvents = {
+    onIxChange: EventName<CustomEvent<any>>,
     onValueChange: EventName<CustomEvent<number>>,
     onValidityStateChange: EventName<IxNumberInputCustomEvent<ValidityState>>,
     onIxBlur: EventName<CustomEvent<void>>
@@ -1011,6 +1014,7 @@ export const IxNumberInput: StencilReactComponent<IxNumberInputElement, IxNumber
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {
+        onIxChange: 'ixChange',
         onValueChange: 'valueChange',
         onValidityStateChange: 'validityStateChange',
         onIxBlur: 'ixBlur'
@@ -1227,6 +1231,7 @@ export const IxTabs: StencilReactComponent<IxTabsElement, IxTabsEvents> = /*@__P
 });
 
 export type IxTextareaEvents = {
+    onIxChange: EventName<CustomEvent<any>>,
     onValueChange: EventName<CustomEvent<string>>,
     onValidityStateChange: EventName<IxTextareaCustomEvent<ValidityState>>,
     onIxBlur: EventName<CustomEvent<void>>
@@ -1238,6 +1243,7 @@ export const IxTextarea: StencilReactComponent<IxTextareaElement, IxTextareaEven
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
     events: {
+        onIxChange: 'ixChange',
         onValueChange: 'valueChange',
         onValidityStateChange: 'validityStateChange',
         onIxBlur: 'ixBlur'

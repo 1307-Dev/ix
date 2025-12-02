@@ -1334,11 +1334,12 @@ export declare interface IxIconToggleButton extends Components.IxIconToggleButto
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['allowedCharactersPattern', 'disabled', 'helperText', 'infoText', 'invalidText', 'label', 'maxLength', 'minLength', 'name', 'pattern', 'placeholder', 'readonly', 'required', 'showTextAsTooltip', 'suppressSubmitOnEnter', 'textAlignment', 'type', 'validText', 'value', 'warningText'],
-  outputs: ['valueChange', 'validityStateChange', 'ixBlur'],
+  outputs: ['ixChange', 'valueChange', 'validityStateChange', 'ixBlur'],
   standalone: false
 })
 export class IxInput {
   protected el: HTMLIxInputElement;
+  @Output() ixChange = new EventEmitter<CustomEvent<any>>();
   @Output() valueChange = new EventEmitter<CustomEvent<string>>();
   @Output() validityStateChange = new EventEmitter<CustomEvent<ValidityState>>();
   @Output() ixBlur = new EventEmitter<CustomEvent<void>>();
@@ -1350,6 +1351,10 @@ export class IxInput {
 
 
 export declare interface IxInput extends Components.IxInput {
+  /**
+   * Event emitted when the input value changes and loses focus (committed change).
+   */
+  ixChange: EventEmitter<CustomEvent<any>>;
   /**
    * Event emitted when the value of the text field changes.
    */
@@ -2011,11 +2016,12 @@ Can be prevented, in which case only the event is triggered, and the modal remai
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['allowEmptyValueChange', 'allowedCharactersPattern', 'disabled', 'helperText', 'infoText', 'invalidText', 'label', 'max', 'min', 'name', 'pattern', 'placeholder', 'readonly', 'required', 'showStepperButtons', 'showTextAsTooltip', 'step', 'suppressSubmitOnEnter', 'textAlignment', 'validText', 'value', 'warningText'],
-  outputs: ['valueChange', 'validityStateChange', 'ixBlur'],
+  outputs: ['ixChange', 'valueChange', 'validityStateChange', 'ixBlur'],
   standalone: false
 })
 export class IxNumberInput {
   protected el: HTMLIxNumberInputElement;
+  @Output() ixChange = new EventEmitter<CustomEvent<any>>();
   @Output() valueChange = new EventEmitter<CustomEvent<number>>();
   @Output() validityStateChange = new EventEmitter<CustomEvent<ValidityState>>();
   @Output() ixBlur = new EventEmitter<CustomEvent<void>>();
@@ -2027,6 +2033,10 @@ export class IxNumberInput {
 
 
 export declare interface IxNumberInput extends Components.IxNumberInput {
+  /**
+   * Event emitted when the input value changes and loses focus (committed change).
+   */
+  ixChange: EventEmitter<CustomEvent<any>>;
   /**
    * Event emitted when the value of the input field changes
    */
@@ -2534,11 +2544,12 @@ export declare interface IxTabs extends Components.IxTabs {
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: ['disabled', 'helperText', 'infoText', 'invalidText', 'label', 'maxLength', 'minLength', 'name', 'placeholder', 'readonly', 'required', 'resizeBehavior', 'showTextAsTooltip', 'textareaCols', 'textareaHeight', 'textareaRows', 'textareaWidth', 'validText', 'value', 'warningText'],
-  outputs: ['valueChange', 'validityStateChange', 'ixBlur'],
+  outputs: ['ixChange', 'valueChange', 'validityStateChange', 'ixBlur'],
   standalone: false
 })
 export class IxTextarea {
   protected el: HTMLIxTextareaElement;
+  @Output() ixChange = new EventEmitter<CustomEvent<any>>();
   @Output() valueChange = new EventEmitter<CustomEvent<string>>();
   @Output() validityStateChange = new EventEmitter<CustomEvent<ValidityState>>();
   @Output() ixBlur = new EventEmitter<CustomEvent<void>>();
@@ -2550,6 +2561,10 @@ export class IxTextarea {
 
 
 export declare interface IxTextarea extends Components.IxTextarea {
+  /**
+   * Event emitted when the input value changes and loses focus (committed change).
+   */
+  ixChange: EventEmitter<CustomEvent<any>>;
   /**
    * Event emitted when the value of the textarea field changes.
    */

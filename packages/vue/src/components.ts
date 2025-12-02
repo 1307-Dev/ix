@@ -750,10 +750,12 @@ export const IxInput: StencilVueComponent<JSX.IxInput, JSX.IxInput["value"]> = /
   'allowedCharactersPattern',
   'suppressSubmitOnEnter',
   'textAlignment',
+  'ixChange',
   'valueChange',
   'validityStateChange',
   'ixBlur'
 ], [
+  'ixChange',
   'valueChange',
   'validityStateChange',
   'ixBlur'
@@ -1009,10 +1011,12 @@ export const IxNumberInput: StencilVueComponent<JSX.IxNumberInput, JSX.IxNumberI
   'suppressSubmitOnEnter',
   'textAlignment',
   'allowEmptyValueChange',
+  'ixChange',
   'valueChange',
   'validityStateChange',
   'ixBlur'
 ], [
+  'ixChange',
   'valueChange',
   'validityStateChange',
   'ixBlur'
@@ -1290,10 +1294,12 @@ export const IxTextarea: StencilVueComponent<JSX.IxTextarea, JSX.IxTextarea["val
   'resizeBehavior',
   'maxLength',
   'minLength',
+  'ixChange',
   'valueChange',
   'validityStateChange',
   'ixBlur'
 ], [
+  'ixChange',
   'valueChange',
   'validityStateChange',
   'ixBlur'
